@@ -336,6 +336,84 @@ h2{position:relative;font:800 clamp(26px,min(3.2vw,6vh),52px)/1.06 var(--display
 .domain{font:400 15px var(--mono);letter-spacing:.3em;color:var(--cyan);margin:8px 0 30px;text-shadow:0 0 10px rgba(0,240,255,.5)}
 .disc{max-width:70ch;margin:26px auto 0;font:500 14px/1.5 var(--sans);color:var(--ink3)}
 
+
+/* live markets */
+.s-mk .wrap{display:flex;flex-direction:column;gap:14px}
+.mk-top{display:flex;justify-content:space-between;align-items:flex-end;gap:28px}
+.mk-top h2{margin-bottom:8px}.mk-top .lede{margin-bottom:0;max-width:none}
+.mk-disc{text-align:right;line-height:1.7;letter-spacing:.06em}
+.mk{position:relative;display:grid;grid-template-columns:236px minmax(0,1fr) 248px;height:clamp(380px,calc(100dvh - var(--hdr) - 250px),820px);background:rgba(8,3,16,.92);border:1px solid var(--line);clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+.mk::before{content:"";position:absolute;left:var(--cut);top:0;width:56px;height:2px;background:var(--magenta);box-shadow:0 0 10px var(--magenta);z-index:2}
+.mk.full{position:fixed;inset:0;z-index:96;height:100dvh;clip-path:none;border:0;transform:none!important;filter:none!important;opacity:1!important}
+html.mk-lock #deck{overflow:hidden}
+.mk-boot{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;font:400 13px var(--mono);letter-spacing:.12em;color:var(--ink3)}
+.mk-spin{width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite}
+.mk-list{display:flex;flex-direction:column;border-right:1px solid var(--line);min-height:0;min-width:0}
+.mk-q{margin:10px 10px 8px;padding:8px 10px;background:rgba(6,3,12,.85);border:1px solid var(--line);color:var(--ink);font:500 15px var(--sans);outline:none}
+.mk-q:focus{border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,240,255,.25)}
+.mk-cls{display:flex;flex-wrap:wrap;gap:4px;padding:0 10px 8px}
+.mk-cls button{display:inline-flex;gap:5px;align-items:baseline;font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border:1px solid rgba(130,112,173,.3);color:var(--ink3)}
+.mk-cls button i{font:400 9.5px var(--mono);font-style:normal;color:var(--ink3);opacity:.8}
+.mk-cls button[aria-pressed="true"]{border-color:var(--magenta);color:var(--ink);background:rgba(255,43,214,.16)}
+.mk-rows{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(255,43,214,.35) transparent}
+.mk-row{display:grid;grid-template-columns:minmax(0,1fr) auto 58px;gap:6px;align-items:center;width:100%;padding:6px 10px;text-align:left;font:400 12px var(--mono);color:var(--ink2);border-bottom:1px solid rgba(255,43,214,.06)}
+.mk-row:hover{background:rgba(0,240,255,.06)}
+.mk-row.on{background:rgba(255,43,214,.14);box-shadow:inset 3px 0 0 var(--magenta)}
+.mk-row .s{display:flex;align-items:center;gap:5px;min-width:0;font:700 13px var(--sans);color:var(--ink);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-row .s em{font:400 9.5px var(--mono);font-style:normal;color:var(--violet2);border:1px solid rgba(180,76,255,.4);padding:0 3px}
+.mk-row .star{font-weight:400;color:rgba(130,112,173,.45);cursor:pointer;font-size:11px}
+.mk-row .star.on{color:var(--amber);text-shadow:0 0 6px rgba(252,238,10,.6)}
+.mk-row .p{text-align:right;color:var(--ink)} .mk-row .c{text-align:right}
+.mk .up{color:var(--green)} .mk .dn{color:var(--red)}
+.mk-count{padding:6px 10px;border-top:1px solid var(--line);font:400 10.5px var(--mono);color:var(--ink3);letter-spacing:.06em}
+.mk-note{padding:16px 12px;font:400 12px var(--mono);color:var(--ink3)}
+.mk-main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.mk-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.mk-id{display:flex;align-items:baseline;gap:8px}
+.mk-sym{font:800 18px var(--display);letter-spacing:.08em;color:var(--ink);text-shadow:0 0 12px rgba(255,43,214,.5)}
+.mk-vb{font:400 10.5px var(--mono);color:var(--ink3);letter-spacing:.08em}
+.mk-px{font:400 22px var(--mono);color:var(--cyan);text-shadow:0 0 10px rgba(0,240,255,.4);min-width:7ch}
+.mk-stat{font:400 12px var(--mono);color:var(--ink3);letter-spacing:.04em}.mk-stat b{font-weight:400;color:var(--ink2)}
+.mk-tools{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mk-iv button{padding:6px 9px;font-size:11px;letter-spacing:.06em;text-transform:none}
+.mk-ind{display:flex;gap:4px}
+.mk-ind button{font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:6px 8px;border:1px solid rgba(130,112,173,.3);color:var(--ink3)}
+.mk-ind button[aria-pressed="true"]{border-color:var(--cyan);color:var(--cyan);background:rgba(0,240,255,.08)}
+.mk-full-btn{padding:7px 9px}
+.mk-chart{position:relative;flex:1;min-height:0;container-type:inline-size}
+.mk-side{display:flex;flex-direction:column;border-left:1px solid var(--line);min-height:0;min-width:0}
+.mk-sh{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;font:700 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);border-bottom:1px solid rgba(255,43,214,.12)}
+.mk-live{display:inline-flex;align-items:center;gap:6px;font:400 10.5px var(--mono);letter-spacing:.06em;text-transform:none;color:var(--ink3)}
+.mk-live i{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.mk-live.ok{color:var(--green)} .mk-live.ok i{background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 1.6s steps(2) infinite}
+#mkDom{display:block;width:100%;flex:1.5;min-height:0}
+.mk-tape{flex:1;min-height:0;overflow:hidden;font:400 11.5px var(--mono)}
+.mk-tape .r{display:grid;grid-template-columns:66px 1fr 1fr;padding:2px 10px;gap:6px}
+.mk-tape .r span:nth-child(n+2){text-align:right}
+.mk-tape .r.h{color:var(--ink3);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.mk-tape .r.big{background:rgba(255,255,255,.05);font-weight:700}
+.mk-tape .r span:first-child{color:var(--ink3)}
+/* the chart engine's own layers (TesseractCharts) */
+.cxp-root{position:absolute;inset:0}
+.cxp-canvas,.cxp-over{position:absolute;inset:0;width:100%;height:100%}
+.cxp-canvas{touch-action:none}.cxp-canvas:focus{outline:none}.cxp-over{pointer-events:none}
+.cxp-legends{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.cxp-legend{position:absolute;left:8px;display:flex;flex-direction:column;gap:1px;font:11px var(--mono);color:var(--ink2);overflow:hidden;pointer-events:none}
+.cxp-legend .lgr{display:flex;align-items:center;gap:6px;width:max-content;max-width:100%;min-height:18px;white-space:nowrap;padding:0 3px}
+.cxp-legend .lgr .nm{color:var(--ink2);font-family:var(--sans);font-weight:600}
+.cxp-legend .lgr .v{font-size:10.5px}.cxp-legend .lgr .v i{font-style:normal;color:var(--ink3)}
+.cxp-legend .lgr .muted{color:var(--ink3);font-size:10.5px}
+.cxp-legend .lgr .note{color:var(--ink3);font-style:italic}
+.cxp-legend .acts{display:none}
+.cxp-legend .lgr.main{gap:7px;font-size:11.5px;flex-wrap:wrap;white-space:normal;row-gap:0}
+.cxp-legend .lgr.main .sy{color:var(--ink);font:700 12px var(--sans);letter-spacing:.06em}
+.cxp-legend .t2{color:var(--ink3)}
+.cxp-legend .ohlc{display:inline-flex;gap:3px;align-items:baseline;font:10.5px var(--mono)}
+.cxp-legend .ohlc i{font-style:normal;color:var(--ink3);margin:0 2px 0 4px}
+.cxp-legend .ohlc.up{color:var(--green)}.cxp-legend .ohlc.dn{color:var(--red)}
+.cxp-legend .ohlc .chg{margin-left:6px}
+@container (max-width:520px){.cxp-legend .ohlc .xo,.cxp-legend .lgr.main .t2,.cxp-legend .lgr .muted{display:none}}
+@media (max-width:1280px){.mk{grid-template-columns:210px minmax(0,1fr) 220px}.mk-hide-s{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.rv{transition:none}}
 
 /* ---------- smaller screens ---------- */
@@ -367,6 +445,14 @@ h2{position:relative;font:800 clamp(26px,min(3.2vw,6vh),52px)/1.06 var(--display
  .btn{font-size:11.5px;padding:12px 16px}
  .code pre{font-size:11.5px;overflow-x:auto}
  .layers-viz{max-width:460px}
+ .mk-top{flex-direction:column;align-items:flex-start;gap:10px}.mk-disc{text-align:left}
+ .mk{grid-template-columns:1fr;height:auto;clip-path:none}
+ .mk-list{border-right:0;border-bottom:1px solid var(--line);max-height:250px}
+ .mk-chart{height:380px;flex:none}
+ .mk-side{border-left:0;border-top:1px solid var(--line)}
+ #mkDom{height:300px;flex:none}.mk-tape{height:220px;flex:none}
+ .mk-tools{margin-left:0}
+ .mk.full .mk-chart{height:calc(100dvh - 120px)}.mk.full .mk-list,.mk.full .mk-side{display:none}
 }
 @media (max-width:560px){.core-grid{grid-template-columns:1fr 1fr}.cc svg.mini{display:none}.s-intro .cta .btn{flex:1;justify-content:center}.wrow{grid-template-columns:80px 1fr 60px}}
 </style>
@@ -562,17 +648,32 @@ h2{position:relative;font:800 clamp(26px,min(3.2vw,6vh),52px)/1.06 var(--display
  </div>
 </section>
 
-<!-- 10 close -->
+<!-- 10 live markets -->
+<section class="slide s-mk" id="markets" data-label="Charts" data-icon="candles">
+ <div class="wrap">
+  <div class="mk-top">
+   <div>
+    <p class="eyebrow rv">10 · Live markets</p>
+    <h2 class="glitch rv" data-text="Live markets">Live markets</h2>
+    <p class="lede rv">Every perp on Hyperliquid, live: crypto, stocks, indices, commodities and FX.</p>
+   </div>
+   <p class="small mk-disc rv">Public market data, straight from Hyperliquid to your browser.<br>Not TesseractAlpha's positions, signals or results.<br>Chart engine: TesseractCharts.</p>
+  </div>
+  <div class="mk rv" id="mk"><div class="mk-boot"><span class="mk-spin"></span>Loading the chart engine…</div></div>
+ </div>
+</section>
+
+<!-- 11 close -->
 <section class="slide s-close" id="close" data-label="Close" data-icon="alpha">
  <canvas id="closeTess" aria-hidden="true"></canvas>
  <div class="wrap">
-  <p class="eyebrow rv">10 · Principle</p>
+  <p class="eyebrow rv">11 · Principle</p>
   <h2 class="glitch rv" data-text="Evidence over opinion">Evidence over opinion</h2>
   <p class="lede rv">Record honestly. Test without peeking. Deploy only what survives. Write everything down.</p>
   <div class="wm glitch auto rv" data-text="TESSERACT"><span>TESSERACT</span><svg class="alpha" viewBox="0 0 100 100" aria-hidden="true"><path d="M94 20 64 60Q52 88 30 88H26Q8 88 8 68V46Q8 26 26 26H30Q52 26 64 52L94 92"/></svg></div>
   <div class="domain rv">BLACKTESSERACT.SI</div>
   <div class="row rv" style="justify-content:center"><button class="btn" data-go="intro">Back to the start</button><button class="btn primary" id="replayBtn">Replay the boot</button></div>
-  <p class="disc rv">TesseractAlpha is research software. Everything on this page is illustrative and generated in your browser; it shows how the system is built, not how it has performed. It runs simulated books only. Nothing here is investment advice.</p>
+  <p class="disc rv">TesseractAlpha is research software. Apart from the live market charts, which show public Hyperliquid data, everything on this page is illustrative and generated in your browser; it shows how the system is built, not how it has performed. It runs simulated books only. Nothing here is investment advice.</p>
  </div>
 </section>
 
@@ -779,6 +880,7 @@ const ICON = {
   blocks: '<rect x="2.5" y="9" width="5" height="6"/><rect x="9.5" y="9" width="5" height="6"/><rect x="16.5" y="9" width="5" height="6"/><path d="M7.5 12h2M14.5 12h2"/>',
   loop: '<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/><circle cx="12" cy="12" r="2.5"/>',
   alpha: '<path d="M21 6l-6.5 8.5Q12 20 7.5 20h-1Q3 20 3 16v-5Q3 6.5 6.5 6.5h1Q12 6.5 14.5 12L21 20"/>',
+  candles: '<path d="M6 3v4M6 15v6M12 2v3M12 13v4M18 5v5M18 17v4"/><rect x="4" y="7" width="4" height="8"/><rect x="10" y="5" width="4" height="8"/><rect x="16" y="10" width="4" height="7"/>',
   store: '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/>',
   rec: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/>',
   ex: '<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
@@ -824,6 +926,8 @@ $("#brand").onclick = () => go(0);
 addEventListener("keydown", (e) => {
   if ($("#boot").style.display !== "none") return;
   if (e.target.matches && e.target.matches("input,textarea,select")) return;
+  if (e.target.closest && e.target.closest("#mk")) return;
+  if (document.documentElement.classList.contains("mk-lock")) return;
   const k = e.key;
   if (["ArrowDown", "PageDown", "ArrowRight"].includes(k) || (k === " " && !e.target.matches("button"))) { e.preventDefault(); go(cur + 1); }
   else if (["ArrowUp", "PageUp", "ArrowLeft"].includes(k)) { e.preventDefault(); go(cur - 1); }
@@ -1293,7 +1397,21 @@ window.__sha256 = sha256;
   tx.style.transition = "opacity .25s";
 })();
 
-/* ---------- 10 close ---------- */
+/* ---------- 10 live markets: loaded only when the section is first shown ---------- */
+(function markets() {
+  const sec = document.getElementById("markets"), host = document.getElementById("mk");
+  let ctl = null, loading = false;
+  const comp = { active: false, tick() {}, wake() {
+    if (ctl) { ctl.setActive(true); return; }
+    if (loading) return; loading = true;
+    import("./charts/site-charts.js").then((m) => { ctl = m.mount(host); })
+      .catch((e) => { console.error(e); host.innerHTML = '<div class="mk-boot">The live charts could not load here. They run on blacktesseract.si.</div>'; });
+  } };
+  attach("markets", comp);
+  new IntersectionObserver((es) => { for (const e of es) if (!e.isIntersecting && ctl && !host.classList.contains("full")) ctl.setActive(false); }, { root: deck, threshold: 0 }).observe(sec);
+})();
+
+/* ---------- 11 close ---------- */
 attach("close", new Tess4D($("#closeTess"), { scale: 0.34, cy: 0.5, glow: 22, lw: 2, speed: 0.6 }));
 $("#replayBtn").onclick = () => { boot(false); };
 
