@@ -153,6 +153,34 @@ h2{position:relative;font:800 clamp(26px,min(3.2vw,6vh),52px)/1.06 var(--display
 #heroTess{height:min(70vh,640px)}
 .pillars{display:flex;flex-wrap:wrap;gap:8px}
 
+
+/* live paper trades on the landing slide */
+.hero-r{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hero-r:has(.tl:not([hidden])) #heroTess{height:min(50vh,470px)}
+.tl{padding:12px 16px 10px}
+.tl-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.tl-t{font:800 12.5px var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.tl-t em{font:400 11px var(--mono);font-style:normal;letter-spacing:.1em;color:var(--violet2);margin-left:8px;text-transform:none}
+.tl-st{display:inline-flex;align-items:center;gap:7px;font:400 11.5px var(--mono);letter-spacing:.06em;color:var(--ink3);white-space:nowrap}
+.tl-st i{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.tl-st.ok{color:var(--green)}.tl-st.ok i{background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 1.6s steps(2) infinite}
+.tl-st.bad{color:var(--red)}.tl-st.bad i{background:var(--red);box-shadow:0 0 8px var(--red)}
+.tl-rows{display:grid;gap:2px;min-height:40px}
+.tl-r{display:grid;grid-template-columns:44px minmax(0,1fr) 44px 70px 92px;gap:10px;align-items:center;padding:4px 6px;font:400 13px var(--mono);color:var(--ink2);border-left:2px solid transparent}
+.tl-r .m{font:700 14px var(--sans);letter-spacing:.06em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-r .m em{font:400 10px var(--mono);font-style:normal;color:var(--violet2);margin-left:5px}
+.tl-r .t{color:var(--ink3)}
+.tl-r .s{font:800 10.5px var(--display);letter-spacing:.12em}
+.tl-r.buy{border-left-color:rgba(0,240,255,.6)}.tl-r.buy .s{color:var(--cyan)}
+.tl-r.sell{border-left-color:rgba(255,42,109,.6)}.tl-r.sell .s{color:var(--red)}
+.tl-r .u,.tl-r .p{text-align:right}
+.tl-r.new{animation:tlIn 1.6s ease-out}
+@keyframes tlIn{0%{background:rgba(255,43,214,.35);transform:translateX(-8px)}100%{background:transparent;transform:none}}
+.tl-note{padding:8px 6px;font:400 12.5px var(--mono);color:var(--ink3)}
+.tl-f{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,43,214,.15);font:400 10.5px var(--mono);letter-spacing:.06em;color:var(--ink3)}
+@media (max-height:760px) and (min-width:1000px){.tl-r:nth-child(n+5){display:none}.hero-r:has(.tl:not([hidden])) #heroTess{height:min(44vh,400px)}}
+@media (max-width:560px){.tl-r{grid-template-columns:36px minmax(0,1fr) 40px 60px;font-size:12px}.tl-r .p{display:none}}
+
 /* layers */
 .layers-viz{position:relative;width:100%;max-width:min(560px,66vh);margin:0 auto;aspect-ratio:1}
 .layers-viz svg{width:100%;height:100%;overflow:visible}
@@ -430,6 +458,7 @@ html.mk-lock #deck{overflow:hidden}
  .slide{padding:calc(var(--hdr) + 26px) 20px 96px 20px;align-items:flex-start}
  .two,.two.flip,.forge-grid,.evo{grid-template-columns:1fr}
  #heroTess{height:340px}
+ .hero-r:has(.tl:not([hidden])) #heroTess{height:300px}
  #surf{height:360px}
  #funnel{height:380px}
  #fan{height:300px}
@@ -494,7 +523,14 @@ html.mk-lock #deck{overflow:hidden}
    <div class="row cta rv"><button class="btn primary" data-go="layers">Enter the tesseract <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="btn" data-go="core">See the core</button></div>
    <div class="pillars rv"><span class="chip y">Fixed, sealed core</span><span class="chip m">Evolving organism</span><span class="chip c">Evidence gate</span></div>
   </div>
-  <div class="canvasbox rv"><canvas id="heroTess" aria-label="A four-dimensional hypercube with axes market, horizon, source and regime, turning slowly"></canvas><div class="hint">Drag to turn it through the 4th dimension</div></div>
+  <div class="hero-r rv">
+   <div class="canvasbox"><canvas id="heroTess" aria-label="A four-dimensional hypercube with axes market, horizon, source and regime, turning slowly"></canvas><div class="hint">Drag to turn it through the 4th dimension</div></div>
+   <div class="panel tl" id="liveTape" hidden aria-live="polite">
+    <div class="tl-h"><span class="tl-t">Live paper trades <em>main book</em></span><span class="tl-st" id="tlSt"><i></i>connecting</span></div>
+    <div class="tl-rows" id="tlRows"></div>
+    <div class="tl-f"><span id="tlN"></span><span>Simulated fills, shown 1 minute late · not investment advice</span></div>
+   </div>
+  </div>
  </div>
 </section>
 
@@ -941,6 +977,47 @@ setInterval(() => { if (!reduced && booted) $$(".glitch.auto").forEach((el) => {
 
 /* ---------- 01 intro: the hypercube you can turn ---------- */
 attach("intro", new Tess4D($("#heroTess"), { scale: 0.3, cy: 0.5, glow: 18, lw: 1.9, drag: true, labels: ["MARKET", "HORIZON", "SOURCE", "REGIME"] }));
+
+
+/* ---------- the landing slide's live paper trades: TesseractAlpha's main book, one minute late ---------- */
+(function liveTape() {
+  const FEED = "https://blacktesseract-default-rtdb.europe-west1.firebasedatabase.app/feed/main.json";
+  if (!FEED || FEED.indexOf("__") === 0) return;
+  const box = $("#liveTape"), rows = $("#tlRows"), st = $("#tlSt"), nEl = $("#tlN");
+  box.hidden = false;
+  let seen = null, data = null, timer = 0;
+  const pxDp = (v) => { const a = Math.abs(v || 0); return a >= 1000 ? 1 : a >= 100 ? 2 : a >= 1 ? 3 : a >= 0.01 ? 5 : 7; };
+  const fpx = (v) => (v == null || !isFinite(v) ? "–" : v.toLocaleString("en-US", { minimumFractionDigits: pxDp(v), maximumFractionDigits: pxDp(v) }));
+  const usd = (v) => (v >= 1e6 ? "$" + (v / 1e6).toFixed(2) + "M" : v >= 1e3 ? "$" + (v / 1e3).toFixed(1) + "K" : "$" + Math.round(v));
+  const ago = (ts) => { const s = Math.max(0, Date.now() / 1000 - ts); return s < 90 ? Math.round(s) + "s" : s < 5400 ? Math.round(s / 60) + "m" : s < 172800 ? Math.round(s / 3600) + "h" : Math.round(s / 86400) + "d"; };
+  const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const name = (m) => { const i = m.indexOf(":"); return i < 0 ? esc(m) : esc(m.slice(i + 1)) + "<em>" + esc(m.slice(0, i)) + "</em>"; };
+  function status(txt, cls) { st.className = "tl-st" + (cls ? " " + cls : ""); st.lastChild.textContent = txt; }
+  function render() {
+    if (!data) return;
+    const list = (data.trades || []).slice(-7).reverse();
+    const key = (t) => t.ts + t.m + t.s + t.usd;
+    rows.innerHTML = list.length ? list.map((t) => `<div class="tl-r ${t.s === "buy" ? "buy" : "sell"}${seen && !seen.has(key(t)) ? " new" : ""}"><span class="t">${ago(t.ts)}</span><span class="m">${name(t.m)}</span><span class="s">${t.s === "buy" ? "BUY" : "SELL"}</span><span class="u">${usd(t.usd)}</span><span class="p">${fpx(t.px)}</span></div>`).join("")
+      : `<div class="tl-note">No fills yet. The book trades when it re-aims.</div>`;
+    seen = new Set(list.map(key));
+    nEl.textContent = data.n ? data.n.toLocaleString("en-US") + " paper fills so far" : "";
+    const fresh = Date.now() - (data.updated || 0) < 150000;
+    status(fresh ? "live · 1 min delay" : "paused · last update " + new Date(data.updated || 0).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }), fresh ? "ok" : "");
+  }
+  async function pull() {
+    try {
+      const r = await fetch(FEED, { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const d = await r.json();
+      if (!d) { status("waiting for the first fills"); rows.innerHTML = '<div class="tl-note">The feed is set up and waiting for TesseractAlpha.</div>'; return; }
+      data = d; render();
+    } catch (e) { if (!data) { status("feed unreachable", "bad"); rows.innerHTML = '<div class="tl-note">The live feed could not be reached from here.</div>'; } }
+  }
+  const loop = () => { clearTimeout(timer); if (!document.hidden) pull(); timer = setTimeout(loop, 15000); };
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) loop(); });
+  setInterval(render, 20000);
+  loop();
+})();
 
 /* ---------- 02 layers ---------- */
 (function layers() {
