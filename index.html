@@ -8,6 +8,14 @@
 <meta name="theme-color" content="#06030c">
 <meta property="og:title" content="TESSERACTα · Black Tesseract">
 <meta property="og:description" content="A self-evolving research organism for crypto perpetual markets. An interactive tour of its core modules.">
+<script>
+/* once GitHub's certificate for the domain is live, move visitors from http to https */
+if (location.protocol === "http:" && /(^|\.)blacktesseract\.si$/i.test(location.hostname)) {
+  fetch("https://" + location.hostname + "/", { mode: "no-cors", cache: "no-store" })
+    .then(function () { location.replace("https://" + location.hostname + location.pathname + location.search + location.hash); })
+    .catch(function () {});
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff2bd6'/%3E%3Cstop offset='1' stop-color='%2300f0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2306030c'/%3E%3Ccircle cx='32' cy='32' r='27' fill='none' stroke='url(%23g)' stroke-width='2.4'/%3E%3Cg fill='none' stroke='url(%23g)' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='18' y='18' width='28' height='28'/%3E%3Crect x='26' y='26' width='12' height='12'/%3E%3Cpath d='M18 18 26 26M46 18 38 26M18 46 26 38M46 46 38 38'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='2.4' fill='%2300f0ff'/%3E%3C/svg%3E">
 <style>
 /* Orbitron, Rajdhani and Share Tech Mono: SIL Open Font License 1.1 */
